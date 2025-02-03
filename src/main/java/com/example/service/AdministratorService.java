@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.domain.Administrator;
+import com.example.form.InsertAdministratorForm;
 import com.example.repository.AdministratorRepository;
 
 /**
@@ -17,7 +18,8 @@ import com.example.repository.AdministratorRepository;
 @Transactional
 public class AdministratorService {
 
-	@Autowired
+	  
+    @Autowired
 	private AdministratorRepository administratorRepository;
 
 	/**

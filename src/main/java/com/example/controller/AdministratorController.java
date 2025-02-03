@@ -3,11 +3,12 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.domain.Administrator;
@@ -23,6 +24,7 @@ import jakarta.servlet.http.HttpSession;
  * @author igamasayuki
  *
  */
+
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
@@ -63,6 +65,7 @@ public class AdministratorController {
 	 */
 	@GetMapping("/toInsert")
 	public String toInsert() {
+		
 		return "administrator/insert";
 	}
 
@@ -73,13 +76,20 @@ public class AdministratorController {
 	 * @return ログイン画面へリダイレクト
 	 */
 	@PostMapping("/insert")
-	public String insert(InsertAdministratorForm form) {
+	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+		if (result.hasErrors()) {
+			// バリデーションエラーがある場合、フォームに戻す
+			return "administrator/insert"; // フォームを再表示
+		}
+
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
 		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
-		return "employee/list";
+		
+		return "employee/list"; // 登録後、リスト画面へ遷移
 	}
+
 
 	/////////////////////////////////////////////////////
 	// ユースケース：ログインをする
@@ -127,5 +137,6 @@ public class AdministratorController {
 		session.invalidate();
 		return "redirect:/";
 	}
-
 }
+
+
