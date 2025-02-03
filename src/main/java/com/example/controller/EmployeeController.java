@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.domain.Administrator;
 import com.example.domain.Employee;
 import com.example.form.UpdateEmployeeForm;
 import com.example.service.EmployeeService;
+
+import jakarta.servlet.http.HttpSession;
 
 /**
  * 従業員情報を操作するコントローラー.
@@ -28,6 +31,9 @@ public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+
+	@Autowired
+	private HttpSession session;
 
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
@@ -51,6 +57,7 @@ public class EmployeeController {
 	@GetMapping("/showList")
 	public String showList(Model model) {
 		List<Employee> employeeList = employeeService.showList();
+		model.addAttribute("employeeList", employeeList);
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
 	}
@@ -86,6 +93,7 @@ public class EmployeeController {
 		if (result.hasErrors()) {
 			return showDetail(form.getId(), model);
 		}
+
 		Employee employee = new Employee();
 		employee.setId(form.getIntId());
 		employee.setDependentsCount(form.getIntDependentsCount());
