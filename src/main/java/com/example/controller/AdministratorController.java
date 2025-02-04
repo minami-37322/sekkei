@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.domain.Administrator;
@@ -99,13 +100,17 @@ public class AdministratorController {
 	 * @param form 管理者情報用フォーム
 	 * @return ログイン後の従業員一覧画面
 	 */
+
+	
 	@PostMapping("/login")
-	public String login(LoginForm form, RedirectAttributes redirectAttributes) {
+	public String login(LoginForm form, RedirectAttributes redirectAttributes,String name) {
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+		
 		if (administrator == null) {
 			redirectAttributes.addFlashAttribute("errorMessage", "メールアドレスまたはパスワードが不正です。");
 			return "redirect:/";
 		}
+		session.setAttribute("name", administrator.getName());
 		return "redirect:/employee/showList";
 	}
 
