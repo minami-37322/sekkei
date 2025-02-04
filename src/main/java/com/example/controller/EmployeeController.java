@@ -1,7 +1,6 @@
 package com.example.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.domain.Administrator;
 import com.example.domain.Employee;
 import com.example.form.UpdateEmployeeForm;
 import com.example.service.EmployeeService;
-
 import jakarta.servlet.http.HttpSession;
 
 /**
@@ -95,7 +91,16 @@ public class EmployeeController {
 
 		Employee employee = new Employee();
 		employee.setId(form.getIntId());
-		employee.setDependentsCount(form.getIntDependentsCount());
+		employee.setName(form.getName());
+		employee.setGender(form.getGender());
+		employee.setHireDate(form.getHireDateAsDate());
+		employee.setAddress(form.getAddress());
+		employee.setCharacteristics(form.getCharacteristics());
+		employee.setMailAddress(form.getMailAddress());
+		employee.setTelephone(form.getTelephone());
+        employee.setDependentsCount(form.getIntDependentsCount());
+		employee.setZipCode(form.getZipCode());
+		employee.setSalary(form.getIntSalary());
 		employeeService.update(employee);
 		return "redirect:/employee/showList";
 	}

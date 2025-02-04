@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import com.example.domain.Administrator;
 import com.example.domain.Employee;
 
 /**
@@ -35,10 +36,12 @@ public class EmployeeRepository {
 		employee.setZipCode(rs.getString("zip_code"));
 		employee.setAddress(rs.getString("address"));
 		employee.setTelephone(rs.getString("telephone"));
-		employee.setSalary(rs.getInt("salary"));
 		employee.setCharacteristics(rs.getString("characteristics"));
 		employee.setDependentsCount(rs.getInt("dependents_count"));
+		employee.setSalary(rs.getInt("salary"));
 		return employee;
+
+		//データベースの世界から情報をもらってつめてる変換して詰めてるrresultsetキャメルケースとスネークケース
 	};
 
 	@Autowired
@@ -80,7 +83,12 @@ public class EmployeeRepository {
 	public void update(Employee employee) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
 
-		String updateSql = "UPDATE employees SET dependents_count=:dependentsCount WHERE id=:id";
+		String updateSql = "UPDATE employees SET name=:name,gender=:gender,hire_date=:hireDate,mail_address=:mailAddress,zip_code=:zipCode,address=:Address,telephone=:telephone,salary=:salary,characteristics=:characteristics,dependents_count=:dependentsCount WHERE id=:id";
 		template.update(updateSql, param);
+
+		//動的に変えたいところをプレースホルダーにする
+
 	}
+
+	
 }
