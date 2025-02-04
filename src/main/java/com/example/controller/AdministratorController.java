@@ -77,6 +77,10 @@ public class AdministratorController {
 	 */
 	@PostMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
+		Administrator existingAdmin = administratorService.findByMailAddress(form.getMailAddress());
+    if (existingAdmin != null) {
+        result.rejectValue("mailAddress", "error.form", "メールアドレスが重複しています");
+    }
 		if (result.hasErrors()) {
 			// バリデーションエラーがある場合、フォームに戻す
 			return "administrator/insert"; // フォームを再表示

@@ -111,7 +111,20 @@
                   <tr>
                     <th nowrap>従業員名</th>
                     <td>
-                      <span th:utext="${employee.name}">山田花子</span>
+                      <input
+                      type="hidden"
+                      name="id"
+                      th:value="${employee.id}"
+                    />
+                    <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="form-control"
+                    th:value="${employee.name}"
+                  />
+                  <div th:errors="*{name}"></div>
+
                     </td>
                   </tr>
                   <tr>
@@ -126,57 +139,129 @@
                   <tr>
                     <th nowrap>性別</th>
                     <td>
-                      <span th:utext="${employee.gender}">女性</span>
+                      <select name="gender">
+                        <option value="man">男性</option>
+                        <option value="women">女性</option>
+                      </select>
+                    <!-- <input
+                    type="text"
+                    name="gender"
+                    id="gender"
+                    class="form-control"
+                    th:value="${employee.gender}"
+                  /> -->
+                  <div th:errors="*{gender}"></div>
+                      <!-- <span th:utext="${employee.gender}">女性</span> -->
                     </td>
                   </tr>
                   <tr>
                     <th nowrap>入社日</th>
                     <td>
-                      <span th:utext="${employee.hireDate}">2012/11/29</span>
+
+                      <input
+                    type="text"
+                    name="hireDate"
+                    id="hireDate"
+                    class="form-control"
+                    th:value="${employee.hireDate}"
+                  />
+                  <div th:errors="*{hireDate}"></div>
+                      <!-- <span th:utext="${employee.hireDate}">2012/11/29</span> -->
                     </td>
                   </tr>
                   <tr>
                     <th nowrap>メールアドレス</th>
                     <td>
-                      <span th:utext="${employee.mailAddress}"
+
+                      <input
+                    type="text"
+                    name="mailAddress"
+                    id="mailAddress"
+                    class="form-control"
+                    th:value="${employee.mailAddress}"
+                  />
+                  <div th:errors="*{mailAddress}"></div>
+                      <!-- <span th:utext="${employee.mailAddress}"
                         >yamada@sample.com</span
-                      >
+                      > -->
                     </td>
                   </tr>
                   <tr>
                     <th nowrap>郵便番号</th>
                     <td>
-                      <span th:utext="${employee.zipCode}">111-1111</span>
+                      
+                      <input
+                    type="text"
+                    name="zipCode"
+                    id="zipCode"
+                    class="form-control"
+                    th:value="${employee.zipCode}"
+                  />
+                  <div th:errors="*{zipCode}"></div>
+                      <!-- <span th:utext="${employee.zipCode}">111-1111</span> -->
                     </td>
                   </tr>
                   <tr>
                     <th nowrap>住所</th>
                     <td>
-                      <span th:utext="${employee.address}"
+                      <input
+                    type="text"
+                    name="address"
+                    id="address"
+                    class="form-control"
+                    th:value="${employee.address}"
+                  />
+                  <div th:errors="*{address}"></div>
+                      <!-- <span th:utext="${employee.address}"
                         >東京都新宿区1-1-1</span
-                      >
+                      > -->
                     </td>
                   </tr>
                   <tr>
                     <th nowrap>電話番号</th>
                     <td>
-                      <span th:utext="${employee.telephone}"
+                      <input
+                      type="text"
+                      name="telephone"
+                      id="telephone"
+                      class="form-control"
+                      th:value="${employee.telephone}"
+                    />
+                    <div th:errors="*{telephone}"></div>
+                      <!-- <span th:utext="${employee.telephone}"
                         >090-0000-0000</span
-                      >
+                      > -->
                     </td>
                   </tr>
                   <tr>
                     <th nowrap>給料</th>
                     <td>
-                      <span th:utext="${employee.salary + '円'}">400000円</span>
+
+                      <input
+                    type="text"
+                    name="salary"
+                    id="salary"
+                    class="form-control"
+                    th:value="${employee.salary}"
+                  />
+                  <div th:errors="*{salary}"></div>
+                      <!-- <span th:utext="${employee.salary + '円'}">400000円</span> -->
                     </td>
                   </tr>
                   <tr>
                     <th nowrap>特性</th>
                     <td>
-                      <span th:utext="${employee.characteristics}"
+                      <input
+                    type="text"
+                    name="characteristics"
+                    id="characteristics"
+                    class="form-control"
+                    th:value="${employee.characteristics}"
+                  />
+                  <div th:errors="*{characteristics}"></div>
+                      <!-- <span th:utext="${employee.characteristics}"
                         >明るく素直な性格です。リーダーシップを発揮します。新卒社員研修の時はグループ開発の時にリーダーを買ってでました。積極性も人間性も抜群です。周りに対する不満も聞いたことがありません。</span
-                      >
+                      > -->
                     </td>
                   </tr>
                   <tr>
@@ -193,17 +278,16 @@
                         style="color: red"
                         for="dependentsCount"
                       ></label>
-                      <input
+                      <!-- <input
                         type="hidden"
                         name="id"
                         th:value="${employee.id}"
-                      />
+                      /> -->
                       <input
                         type="text"
                         name="dependentsCount"
                         id="dependentsCount"
                         class="form-control"
-                        value="3"
                         th:errorclass="error-input"
                         th:value="${employee.dependentsCount}"
                       />

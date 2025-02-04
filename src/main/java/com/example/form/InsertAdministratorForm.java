@@ -2,11 +2,9 @@ package com.example.form;
 
 import org.hibernate.validator.constraints.Length;
 
-import jakarta.servlet.annotation.HttpConstraint;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 
 /**
  * 管理者情報登録時に使用するフォーム.
